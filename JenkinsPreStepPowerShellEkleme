@@ -1,0 +1,38 @@
+1.Jenkins'de Yeni Bir Job Oluşturun:
+Jenkins ana sayfasından "New Item" veya "Yeni Oluştur" bağlantısına tıklayarak yeni bir işlem başlatın.
+İşlem adını ve türünü seçin (freestyle, pipeline vs.).
+
+2.Build'iniz için Pre-Step Ekleyin:
+İşlem yapılandırma sayfasına gidin.
+Sol menüde "Build" veya "Build Environment" bölümü altında "Add build step" veya "Build Öncesi Yapı Ekle" gibi bir seçenek olmalıdır. Bu seçeneği seçin.
+
+3.PowerShell Script'i Ekleyin:
+Yeni bir pre-step eklerken, genellikle bir dropdown menüsü veya liste ile birlikte "Execute Windows batch command" veya "Execute shell" gibi bir seçenek olur.
+Bu seçenekler arasından "Execute Windows batch command" seçeneğini bulun ve tıklayın (eğer işletim sisteminiz Windows ise).
+Şimdi PowerShell betiğinizi ekleyebilirsiniz. Açılan metin kutusuna PowerShell betiğinizi yazın veya bir PowerShell dosyası çağırabilirsiniz. Örneğin:
+
+powershell
+# Bu bir PowerShell betiği örneğidir
+Write-Host "Merhaba, Jenkins!"
+# PowerShell'da başka komutlar da ekleyebilirsiniz
+
+4.Değişiklikleri Kaydedin:
+PowerShell betiğini ekledikten sonra, Jenkins işlem yapılandırma sayfasını kaydetmek için sayfanın altındaki "Save" veya "Kaydet" düğmesine tıklayın.
+Bu adımları tamamladıktan sonra, Jenkins işlemi çalıştırdığınızda belirttiğiniz PowerShell betiği önceden çalıştırılacaktır. Bu adım, iş akışınızı istediğiniz şekilde özelleştirmenize ve gereksinimlerinize göre özel işlemler eklemenize olanak tanır.
+
+
+----- Jenkins'te PowerShell betiğini yazdığınız "Pre-Step" ekranı ile Jenkinsfile içinde yazdığınız "Pre-Step" ekranı farklıdır.
+
+1.Pre-Step Ekranı (Freestyle Projeler için):
+Jenkins'te bir "Freestyle" proje oluşturduğunuzda veya bir pipeline oluşturmadan önce,
+işlem yapılandırma sayfasında "Pre-Step" ekleyebilirsiniz. Bu, işlem başlamadan önce belirli bir işlemi gerçekleştirmenize olanak tanır. Bu adımda, PowerShell betiğini yazabilirsiniz.
+
+2.Jenkinsfile (Pipeline Projeleri için):
+Jenkins'te bir "Pipeline" projesi oluşturduğunuzda, işlem mantığını Jenkinsfile içinde tanımlarsınız.
+Jenkinsfile, iş akışınızı tanımlayan bir dosyadır ve adımlarınızı, koşulları, döngüleri ve diğer işlem mantığını içerir.
+Jenkinsfile içinde de "Pre-Step" adımları ekleyebilirsiniz. Ancak, bu adımlar Jenkinsfile içinde yazılır ve genellikle Groovy dilinde olur.
+
+Yani, PowerShell betiğini Jenkins "Freestyle" projelerinde "Pre-Step" ekranına, Jenkinsfile içinde ise Groovy dilinde yazılmış
+"Pre-Step" adımlarına eklersiniz. Bu iki yöntem birbirine benzer sonuçlar üretebilir, ancak yapıları ve yazım biçimleri farklıdır.
+
+
