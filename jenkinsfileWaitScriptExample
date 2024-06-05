@@ -1,0 +1,13 @@
+stage('Wait') {
+    // Parametrik bekleme süresi
+    when {
+        expression { params.BUILD_TYPE == 'debug' }
+    }
+    steps {
+        // Debug yapıda bekleme süresi örneği
+        script {
+            echo "Waiting for 2 minutes..."
+            sleep time: 120, unit: 'SECONDS'
+        }
+    }
+}
