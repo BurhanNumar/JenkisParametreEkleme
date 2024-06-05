@@ -1,0 +1,45 @@
+1.Branch Adı Kontrolü:
+when {
+    expression { env.BRANCH_NAME == 'master' }
+}
+
+2.Değişiklik Kontrolü:
+when {
+    expression { currentBuild.changeSets.size() > 0 }
+}
+Bu kod, mevcut Jenkins build'inin bir değişiklik içerip içermediğini kontrol eder. 
+Eğer bir değişiklik varsa, bu adım çalıştırılır
+
+3.Parametre Kontrolü:
+when {
+    expression { params.BUILD_TYPE == 'release' }
+}
+Bu kod, Jenkins'de belirli bir parametrenin belirli bir değere sahip olup olmadığını kontrol eder. Bu örnekte,
+BUILD_TYPE parametresinin değeri 'release' ise, adım çalıştırılır.
+
+4.Or İfadesi Kullanımı:
+when {
+    anyOf {
+        expression { params.BUILD_TYPE == 'debug' }
+        expression { params.BUILD_TYPE == 'release' }
+    }
+}
+Bu kod, birden fazla koşulun kontrol edildiği bir durumu temsil eder. 
+Eğer BUILD_TYPE parametresi 'debug' veya 'release' ise, adım çalıştırılır.
+
+5.And İfadesi Kullanımı:
+when {
+    allOf {
+        expression { params.BUILD_TYPE == 'debug' }
+        expression { env.BRANCH_NAME == 'development' }
+    }
+}
+Bu kod, birden fazla koşulun tümünün sağlanması gerektiği bir durumu temsil eder. 
+Eğer BUILD_TYPE parametresi 'debug' ise ve Jenkins çalışma ortamındaki branch 'development' ise, adım çalıştırılır.
+
+Bu örnekler, Jenkins Pipeline içinde when ve expression bloklarını kullanarak çeşitli koşulların kontrol edilmesini göstermektedir. 
+Bu blokların kullanımı, Jenkins iş akışlarınızı koşullu olarak yapılandırmanıza olanak sağlar.
+
+
+
+
