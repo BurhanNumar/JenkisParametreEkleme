@@ -1,0 +1,14 @@
+Jenkins Pipeline içinde kullanılan tetikleme (trigger) fonksiyonları yalnızca pollSCM değildir. Diğer yaygın olarak kullanılan tetikleme fonksiyonları arasında şunlar bulunur:
+
+pollSCM: SCM (Source Control Management) sistemi (örneğin, Git, SVN vb.) üzerinde belirli aralıklarla değişiklikleri kontrol eder ve pipeline'i tetikler. Bu fonksiyon genellikle periyodik olarak SCM'deki değişiklikleri algılamak için kullanılır.
+
+cron: cron işlemlerini kullanarak belirli bir zamanlama formatına göre pipeline'i tetikler. Örneğin, cron işlemlerini kullanarak belirli saatlerde, günlerde veya ayarlarda pipeline'in çalışmasını planlayabilirsiniz.
+
+build: Başka bir işlem başarıyla tamamlandığında (örneğin, başka bir pipeline veya projenin başarılı bir şekilde tamamlanması durumunda) pipeline'i tetikler.
+
+upstream: Yineleyen işlemlerde, bir pipeline'in başka bir pipeline'den (üst akış) bir işlem tamamlanınca tetiklenmesini sağlar.
+
+Bu tetikleme fonksiyonları Jenkins Pipeline'de yaygın olarak kullanılır. Her biri farklı senaryolar için kullanışlıdır ve ihtiyaca göre uygun olanı seçilebilir.
+
+
+
