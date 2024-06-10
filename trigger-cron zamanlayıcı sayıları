@@ -1,0 +1,21 @@
+cron ifadesi kullanılarak belirli bir zaman dilimini ifade eden bir örnek vereyim. Örneğin, H * * * * ifadesi her saat başında işlemi tetikler. Ayrıca, belirli dakika, saat, gün, ay ve haftanın hangi günü olacağını da belirtebiliriz.
+
+İşte birkaç örnek:
+
+* * * * *: Her dakika çalıştır (örneğin, her dakika bir defa çalıştırmak için)
+0 * * * *: Her saat başında çalıştır (örneğin, saat başı işlemi tetiklemek için)
+0 12 * * *: Her gün saat 12:00'de çalıştır (örneğin, her gün öğlen işlemi tetiklemek için)
+0 0 1 * *: Ayın ilk günü, gece yarısı (00:00) çalıştır (örneğin, 
+her ayın başında işlemi tetiklemek için)
+0 0 * * 0: Her Pazar, gece yarısı (00:00) çalıştır (örneğin, 
+her hafta Pazar günü işlemi tetiklemek için)
+Her * sembolü, o zaman biriminde herhangi bir değeri ifade eder. 
+Örneğin, saat alanında * her saatte işlemi çalıştırmak anlamına gelir. 
+Eğer belirli bir değer vermek isterseniz, o zaman bir saat değeri kullanabilirsiniz.
+Örneğin, 0 ile saat 12'yi ifade eder.
+
+Bu örneklerle cron ifadesinin nasıl kullanılabileceği
+hakkında bir fikir edinebilirsiniz.
+
+
+
