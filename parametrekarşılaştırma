@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(name: 'BUILD_TYPE', choices: ['debug', 'release'], description: 'Specify the build type: debug or release')
+    }
+
+    stages {
+        stage('Build') {
+            when {
+                expression {
+                    params.BUILD_TYPE == 'release'
+                }
+            }
+            steps {
+                echo 'Yayın sürümü için özel işlemler yapılıyor...'
+                // Burada yayın sürümü için gerekli işlemleri yapabilirsiniz.
+            }
+        }
+    }
+}
+Bu Jenkins pipeline örneğinde, kullanıcıdan BUILD_TYPE adında bir parametre beklenir
+ve bu parametre, bir dizi seçenek arasından seçilebilir: 'debug' veya 'release'. 
+Ardından, BUILD_TYPE parametresinin değeri kontrol edilir. Eğer değer 'release' ise, 
+'Yayın sürümü için özel işlemler yapılıyor...' mesajı yazdırılır ve yayın sürümü için
+gerekli işlemler gerçekleştirilir. Bu şekilde, Jenkins pipeline, belirli bir koşula
+dayalı olarak belirli bir adımı çalıştırır.
+
+
+
