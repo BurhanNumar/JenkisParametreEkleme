@@ -1,29 +1,33 @@
 pipeline {
     agent any
     
-            trigger{
-                cron(spec:'0 1 2 * * ')
-            }
+    triggers {
+        cron(spec: '0 1 2 * *')
+    }
     
-             parameters {
+    parameters {
         string(name: 'BUILD_TYPE', defaultValue: 'debug', description: 'Specify the build type: debug or release')
-    }
-        when {
-        allOf {
-            expression { params.BUILD_TYPE == 'debug' }
-            expression { env.BRANCH_NAME == 'development' }
-        }
-    }
-    
-            steps {
-        // Debug yapıda bekleme süresi örneği
-        script {
-            echo "Waiting for 2 minutes..."
-            sleep time: 120, unit: 'SECONDS'
-        }
     }
     
     stages {
+        stage('Wait for Debug and Development Branch') {
+            when {
+                allOf {
+                    expression {
+                        params.BUILD_TYPE == 'debug'
+                    }
+                    expression {
+                        env.BRANCH_NAME == 'development'
+                    }
+                }
+            }
+            steps {
+                script {
+                    echo "Waiting for 2 minutes..."
+                    sleep time: 120, unit: 'SECONDS'
+                }
+            }
+        }
         stage('Create Directory') {
             steps {
                 bat """
@@ -38,13 +42,11 @@ pipeline {
         }
         stage('Checkout') {
             steps {
-                // GitHub reposunu klonla
                 git 'https://github.com/jenkins-docs/simple-java-maven-app.git'
             }
         }
         stage('Build') {
             steps {
-               
                 dir ('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\simple-java-maven-app') {
                     bat """
                     set M2_HOME=C:\\Program Files\\apache-maven-3.9.6-bin\\apache-maven-3.9.6
@@ -58,18 +60,16 @@ pipeline {
         stage('Test') {
             steps {
                 dir ('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\simple-java-maven-app') {
-                  
                     bat """
-                     set M2_HOME=C:\\Program Files\\apache-maven-3.9.6-bin\\apache-maven-3.9.6
-                     set PATH=%M2_HOME%\\bin;%PATH%
-                     mvn test
-                     """
+                    set M2_HOME=C:\\Program Files\\apache-maven-3.9.6-bin\\apache-maven-3.9.6
+                    set PATH=%M2_HOME%\\bin;%PATH%
+                    mvn test
+                    """
                 }
             }
         }   
         stage('Deploy') {
             steps {
-                // Web uygulamasını IIS'e yayınla
                 bat 'xcopy /s "C:\\path\\to\\webapp" "C:\\inetpub\\wwwroot"'
             }
         }
@@ -77,11 +77,9 @@ pipeline {
     
     post {
         success {
-            // Başarılı olursa bildirim gönder
             echo 'Proje başarıyla derlendi, test edildi ve dağıtıldı.'
         }
         failure {
-            // Başarısız olursa bildirim gönder
             echo 'Proje derleme, test veya dağıtma aşamasında başarısız oldu.'
         }
     }
